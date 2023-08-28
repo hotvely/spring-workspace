@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="greet1" class="com.kh.di.Greet" />
+	
+	
+	
+	<!-- 아래 코드에서는 생성자 주입 -->
+	<bean id="greet2" class="com.kh.di.Greet">
+		<constructor-arg value="안뇽! 스프링!!">
+		</constructor-arg>
+	</bean>
+	
+	
+	
+	<bean id="greet3" class="com.kh.di.Greet">
+		<property name="message" value="하이! 프로퍼티를 이용한 방식임!"></property>
+	</bean>
+
+
+	<bean id="str4" class="java.lang.String">
+		<constructor-arg value="Spring Bean xml파일에서 다른 객체를 이용해서 ~~ 호출하기!!"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="greet4" class="com.kh.di.Greet">
+		<property name="message" ref="str4"></property>
+	</bean>
+
+</beans>
