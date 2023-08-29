@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
@@ -13,6 +14,13 @@
 	<context:component-scan
 		base-package="com.kh.service"></context:component-scan>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+	<!-- 클래스를 이용해서 프록시를 생성하고 싶다면 proxy-target-class = "true" 속성 추가 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+	<bean id="character" class="com.kh.character.Character" p:name="김아무" p:level="99" p:weapon-ref="bow" ></bean>
+	<bean id="bow" class="com.kh.character.Bow" p:name="드래곤의 불쏘시개" ></bean>
+	<bean id="characterAspect" class="com.kh.aop.CharacterAspect"></bean>
+	
 
 
 </beans>

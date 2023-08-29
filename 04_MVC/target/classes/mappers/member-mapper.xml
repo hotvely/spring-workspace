@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="memberMapper">
+	<resultMap type="Member" id="memberMap">
+		<id property="id" column="id" />
+		<result property="pwd" column="password" />
+		<result property="name" column="name" />
+		<result property="addr" column="address" />
+	</resultMap>
+
+	<insert id="registerMember" parameterType="Member">
+		INSERT INTO MEMBER(ID,
+		PASSWORD, NAME, ADDRESS)
+		VALUES(#{id},#{pwd},#{name},#{addr})
+	</insert>
+
+	<select id="findMember" parameterType="Member"
+		resultType="Member">
+		SELECT * FROM MEMBER
+		<where>
+			<if test="id != null">ID LIKE '%'||#{key}||'%'</if>
+			<if test="name != null">OR NAME LIKE '%'||#{key}||'%'</if>
+			<if test="addr != null">OR ADDRESS LIKE '%'||#{key}||'%'</if>
+		</where>
+
+	</select>
+
+	<select id="showAllMember" resultMap="memberMap">
+		SELECT ID, PASSWORD, NAME,
+		ADDRESS FROM MEMBER
+	</select>
+
+	<select id="loginMember" resultMap="memberMap"
+		parameterType="Member">
+		SELECT * FROM MEMBER
+		<where>
+			<if test="id!=null">ID=#{id}</if>
+			<if test="pwd!=null">AND PASSWORD=#{pwd}</if>
+		</where>
+	</select>
+
+	<update id="updateMember">
+		UPDATE MEMBER SET
+		
+			<if test="pwd !=null">PASSWORD=#{pwd},</if>
+			<if test="name !=null">NAME=#{name},</if>
+			<if test="addr !=null">ADDRESS=#{addr}</if>
+		
+		WHERE ID=#{id}
+	</update>
+
+</mapper>

@@ -16,18 +16,24 @@ public class SampleServiceTest2
 {
 	@Setter(onMethod_ = @Autowired)
 	private SampleService service;
-
-	@Test
-	public void testClass()
-	{
-		log.info(service);
-		log.info(service.getClass().getName());
-	}
+//
+//	@Test
+//	public void testClass()
+//	{
+//		log.info(service);
+//		log.info(service.getClass().getName());
+//	}
 
 	@Test
 	public void testAdd() throws Exception
 	{
 		log.info(service.doAdd("1234", "3456"));
 	}
+	
+//	@Test
+//	public void testAddError() throws Exception{
+//		log.info(service.doAdd("1234", "ㄱㄴㄷ"));
+//	}
+	
 
 }
