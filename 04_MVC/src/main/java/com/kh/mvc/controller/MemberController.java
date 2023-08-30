@@ -66,14 +66,13 @@ public class MemberController
 	}
 
 	@RequestMapping("signIn")
-	public String signIn(Member vo, HttpServletRequest req)
+	public String signIn(Member vo, HttpSession session)
 	{
-		HttpSession session = req.getSession();
-		System.out.println("웹에서 넘어온 .. VO " + vo);
 		if (service.login(vo) != null)
 		{
-			System.out.println("singIn" + service.login(vo));
+
 			session.setAttribute("vo", service.login(vo));
+
 			return "redirect:/";
 		}
 
@@ -83,10 +82,10 @@ public class MemberController
 	// allMember - 비즈니스 로직 포함, 데이터 바인딩 model.
 	// --> return "find_ok"
 	@RequestMapping("allMember")
-	public String allMember(HttpServletRequest req)
+	public String allMember(Model model)
 	{
 		List<Member> list = service.showAllMember();
-		req.setAttribute("list", list);
+		model.addAttribute("list", list);
 
 		if (list != null)
 			return "find_ok";
@@ -96,9 +95,9 @@ public class MemberController
 
 	// logout - 로그아웃 기능!
 	@RequestMapping("logout")
-	public String logout(HttpServletRequest req)
+	public String logout(HttpSession session)
 	{
-		HttpSession session = req.getSession();
+
 		session.setAttribute("vo", null);
 
 		return "redirect:/";
@@ -114,18 +113,23 @@ public class MemberController
 	}
 
 	@RequestMapping("updateMember")
-	public String update(Member vo, HttpServletRequest req)
+	public String update(Member vo, HttpSession session)
 	{
-		HttpSession session = req.getSession();
-	
 		
-		vo.setId(((Member)session.getAttribute("vo")).getId());
+		Member prevMem = (Member)session.getAttribute("vo");
 		
+		vo.setId(prevMem.getId());
+		System.out.println(vo);
 		if (service.update(vo) > 0)
 		{
-		
-			//session에 있는 값 변경하쟈~~
+			System.out.println("값 변경 완료");
+			
+			System.out.println("변경하기 전 member : " + prevMem);
+			
+			
 			session.setAttribute("vo", vo);
+			System.out.println("변경 후 member : " + session.getAttribute("vo"));
+			
 			return "redirect:/";
 		}
 			

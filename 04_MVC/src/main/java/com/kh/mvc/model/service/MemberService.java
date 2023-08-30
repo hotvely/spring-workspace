@@ -39,8 +39,8 @@ public class MemberService
 	
 	public int update(Member vo)
 	{
-		
-		return  dao.updateMember(vo);
+		System.out.println(dao.updateMember(vo));
+		return dao.updateMember(vo);
 	}
 	
 

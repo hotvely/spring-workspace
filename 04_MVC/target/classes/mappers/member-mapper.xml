@@ -16,7 +16,7 @@
 	</insert>
 
 	<select id="findMember" parameterType="Member"
-		resultType="Member">
+		resultMap="memberMap">
 		SELECT * FROM MEMBER
 		<where>
 			<if test="id != null">ID LIKE '%'||#{key}||'%'</if>
@@ -42,11 +42,11 @@
 
 	<update id="updateMember">
 		UPDATE MEMBER SET
-		
-			<if test="pwd !=null">PASSWORD=#{pwd},</if>
-			<if test="name !=null">NAME=#{name},</if>
-			<if test="addr !=null">ADDRESS=#{addr}</if>
-		
+		<trim suffixOverrides=",">
+			<if test="pwd != null"> PASSWORD=#{pwd},</if>
+			<if test="name != null"> NAME=#{name},</if>
+			<if test="addr != null"> ADDRESS=#{addr},</if>
+		</trim>
 		WHERE ID=#{id}
 	</update>
 

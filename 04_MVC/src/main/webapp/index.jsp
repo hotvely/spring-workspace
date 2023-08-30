@@ -15,6 +15,7 @@
 		<li><a href="search">회원검색</a></li>
 		<c:choose>
 			<c:when test="${empty vo }">
+				<p>${mem}</p>
 				<li><a href="register">회원가입</a></li>
 				<li><a href="login">로그인</a></li>
 			</c:when>
