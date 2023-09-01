@@ -9,7 +9,7 @@
 		INSERT INTO
 		BOARD(no, title, content, writer)
 		VALUES(SEQ_BOARD.NEXTVAL, #{title},
-		#{content}, #{writer})
+		#{content}, #{writer},#{url})
 	</insert>
 	
 	
@@ -19,7 +19,7 @@
 		SELECT * FROM
 		(
 		SELECT /*+ INDEX_DESC(board PK_BOARD) */ ROWNUM NUM, NO,
-		TITLE,writer,regdate
+		TITLE,writer,regdate, url
 		FROM board WHERE ROWNUM <= (#{page} * #{amount}) 
 		)
 		WHERE NUM > (#{page} - 1) * #{amount}
@@ -52,7 +52,7 @@
 	<!-- update -->
 	<update id="update" parameterType="Board">
 	UPDATE board
-	SET title=#{title}, content=#{content}
+	SET title=#{title}, content=#{content}, url=#{url}
 	WHERE no=#{no}
 	</update>
 	

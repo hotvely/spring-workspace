@@ -51,8 +51,7 @@
 		<div class="header">
 			<h1>List Page</h1>
 			<div>
-				<a href="/board/insert" class="btn btn-outline-warning">게시글
-					등록</a>
+				<a href="/board/insert" class="btn btn-outline-warning">게시글 등록</a>
 			</div>
 		</div>
 		<table class="table">
@@ -72,8 +71,7 @@
 						</td>
 						<td>${board.writer}</td>
 						<td><fmt:formatDate value="${board.regdate}"
-								pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
-						</td>
+								pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -83,9 +81,9 @@
 			<c:if test="${paging.prev }">
 
 				<li class="paging-item"><a class="page-link"
-					href="/board/list?page=${paging.startPage - 1} ">Prev</a>
-				</li>
-				<a class="page-link" href="/board/list?page=${paging.startPage -1 } ">${paging.startPage - 1 }</a>
+					href="/board/list?page=${paging.startPage - 1} ">Prev</a></li>
+				<a class="page-link"
+					href="/board/list?page=${paging.startPage -1 } ">${paging.startPage - 1 }</a>
 				<li class="paging-item"><a class="page-link" href="#pagination">...</a></li>
 				<li class="paging-item">
 			</c:if>
@@ -93,8 +91,7 @@
 				var="pageIdx">
 				<li class="page-item"><a
 					class="page-link ${paging.cri.page == num ? 'active' : '' }"
-					href="/board/list?page=${pageIdx }">${pageIdx}</a>
-				</li>
+					href="/board/list?page=${pageIdx }">${pageIdx}</a></li>
 			</c:forEach>
 
 			<c:if test="${paging.next }">
@@ -103,8 +100,7 @@
 					href="/board/list?page=${paging.endPage + 1 } ">${paging.endPage+1}</a>
 				</li>
 				<li class="paging-item"><a class="page-link"
-					href="/board/list?page=${paging.endPage + 1 } ">Next</a>
-				</li>
+					href="/board/list?page=${paging.endPage + 1 } ">Next</a></li>
 			</c:if>
 		</ul>
 		</nva>
