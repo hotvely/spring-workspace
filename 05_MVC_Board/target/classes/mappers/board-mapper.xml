@@ -7,9 +7,9 @@
 	<insert id="insert" parameterType="Board"
 		useGeneratedKeys="true" keyProperty="no" keyColumn="no">
 		INSERT INTO
-		BOARD(no, title, content, writer)
+		BOARD(no, title, content, writer, url)
 		VALUES(SEQ_BOARD.NEXTVAL, #{title},
-		#{content}, #{writer},#{url})
+		#{content}, #{writer}, #{url})
 	</insert>
 	
 	

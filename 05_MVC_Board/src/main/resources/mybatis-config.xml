@@ -7,19 +7,16 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.mvc.model.vo.Board" alias="Board" />
+		<typeAlias type="com.kh.mvc.model.vo.Member" alias="Member" />
 	</typeAliases>
-
-
 
 	<!-- 단위 테스트를 위한 추가 -->
 	<environments default="develop">
 		<environment id="develop">
 			<transactionManager type="JDBC"></transactionManager>
 			<dataSource type="UNPOOLED">
-				<property name="driver"
-					value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url"
-					value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
 				<property name="username" value="spring" />
 				<property name="password" value="spring" />
 			</dataSource>
@@ -29,6 +26,7 @@
 	<!-- mapper -->
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml" />
+		<mapper resource="mappers/member-mapper.xml" />
 	</mappers>
 
 
