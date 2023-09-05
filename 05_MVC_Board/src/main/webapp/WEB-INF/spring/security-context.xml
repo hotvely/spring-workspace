@@ -13,8 +13,14 @@
 	<bean id="memberService" class="com.kh.mvc.model.service.MemberService"></bean>
 	<!-- <bean id="boardService" class="com.kh.mvc.model.service.BoardService"></bean> -->
 
+
+
 	<security:http>
 		<security:intercept-url pattern="/user/all" access="permitAll" />
+		<security:intercept-url pattern="/board/view" access="permitAll" />
+		<security:intercept-url pattern="/board/update" access="hasAnyRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/board/insert" access="hasAnyRole('ROLE_MEMBER')" />
+
 		<!-- hasRole : 한개 역할 지정(관리자만...), hasAnyRole : 여러개 역할 지정(관리자,일반회원 모두 ) -->
 		<security:intercept-url pattern="/user/member" access="hasAnyRole('ROLE_MEMBER')" />
 		<security:intercept-url pattern="/user/admin" access="hasRole('ROLE_ADMIN')" />
@@ -27,7 +33,7 @@
 		<!-- <security:access-denied-handler error-page="/error"/> -->
 		<security:access-denied-handler ref="CustomAccessDeniedHandler" />
 	</security:http>
-
+	
 	<!-- 인증 매니저 -->
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="memberService">

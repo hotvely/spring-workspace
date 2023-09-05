@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<typeAliases>
+		<package name="com.kh.api.model" />
+	</typeAliases>
+
+	<!-- 단위 테스트를 위한 추가 -->
+	<environments default="develop">
+		<environment id="develop">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="spring" />
+				<property name="password" value="spring" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- mapper -->
+	<mappers>
+		<mapper resource="mappers/phone-mapper.xml"/>
+	</mappers>
+
+
+</configuration>

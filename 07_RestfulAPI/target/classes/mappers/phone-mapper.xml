@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="phone">
+
+	<resultMap type="Company" id="Company">
+		<id column="vcode" />
+		<result column="vendor" />
+	</resultMap>
+
+	<resultMap type="Phone" id="Phone">
+		<id column="num" property="num" />
+		<result column="model" property="model" />
+		<result column="price" property="price" />
+		<result column="vcode" property="vcode" />
+		<association property="company">
+			<result column="vcode" property="vcode" />
+			<result column="vendor" property="vendor" />
+		</association>
+	</resultMap>
+
+
+
+	<insert id="insert" parameterType="Phone">
+		INSERT INTO PHONE(num, model, price, vcode) VALUES (#{num}, #{model}, #{price}, #{vcode})
+	</insert>
+
+
+
+
+
+	<!-- dynamic query 이용해서 : selectOne (num에 따라서...) , selectAll 둘다 .... -->
+	<select id="select" resultMap="Phone">
+		<choose>
+			<when test="num !=null">	
+				SELECT * FROM PHONE JOIN COMPANY ON PHONE.vcode = COMPANY.vcode WHERE num = #{num}
+			</when>
+			<otherwise>
+				SELECT * FROM PHONE JOIN COMPANY ON PHONE.vcode = COMPANY.vcode
+			</otherwise>
+		</choose>
+	</select>
+
+	<delete id="delete"></delete>
+
+	<update id="update"></update>
+
+
+	<!-- dynamic query 사용 : id pw 둘다 입력했을 때랑, id만 입력했을때 ...... ? -->
+	<select id="selectUser">
+
+	</select>
+</mapper>

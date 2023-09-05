@@ -52,9 +52,18 @@ public class BoardController
 	}
 
 	@PostMapping("/insert")
-	public String insert(Board board)
+	public String insert(Board board) throws IllegalStateException, IOException
 	{
-		service.insert(board);
+
+
+		if (!board.getTitle().isEmpty() && !board.getContent().isEmpty())
+		{
+			fileUpload(board, board.getUploadFile());
+			
+			service.insert(board);
+			return "redirect:/board/list";
+		}
+
 		return "redirect:/board/list";
 	}
 
@@ -77,7 +86,7 @@ public class BoardController
 	{
 		MultipartFile file = board.getUploadFile();
 
-		ChangeImg(board, file);
+		fileUpload(board, file);
 
 		if (board.getTitle().isEmpty())
 		{
@@ -98,7 +107,7 @@ public class BoardController
 	{
 		HashMap map = new HashMap();
 		map.put("path", path);
-		
+
 		return new ModelAndView("downloadView", map);
 	}
 
@@ -117,21 +126,21 @@ public class BoardController
 //	@PutMapping
 //	@DeleteMapping
 
-	public void ChangeImg(Board board, MultipartFile file) throws IllegalStateException, IOException
+	public void fileUpload(Board board, MultipartFile file) throws IllegalStateException, IOException
 	{
-		// DB에 저장되어 있는 URL이 남아 있을때... 우선 적으로 변경하려고 하는 file유무에 상관없이 삭제한후
-		// board에 uploadFile을 바까준다(있으면 value넣고 파일 없으면 null값으로..)
-		if (board.getUrl() != null)
-		{
-			File remove_file = new File(path + board.getUrl().replace("/upload/", ""));
-			if (remove_file.delete())
-			{
-				board.setUploadFile(file);
-			}
-		}
 
 		if (!file.isEmpty()) // 업로드할 파일이 존재하면... url항상 바꿔주면 됨, 같은 파일이든 다른 파일이든.
-		{
+		{ 
+			// DB에 저장되어 있는 URL이 남아 있을때... 우선 적으로 변경하려고 하는 file유무에 상관없이 삭제한후
+			// board에 uploadFile을 바까준다(있으면 value넣고 파일 없으면 null값으로..)
+			if (board.getUrl() != null)
+			{
+				File remove_file = new File(path + board.getUrl().replace("/upload/", ""));
+				if (remove_file.delete())
+				{
+					board.setUploadFile(file);
+				}
+			}
 			// 중복 방지를 위한 UUID적용...
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid.toString() + "_" + file.getOriginalFilename();

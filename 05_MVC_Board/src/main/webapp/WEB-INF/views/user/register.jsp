@@ -8,13 +8,15 @@
 <body>
 	<h1>회원가입..</h1>
 	<form action="/register" method="post">
-		아이디 : <input type="text" name="id">
-		<br />
-		비밀번호 : <input type="password" name="password">
-		<br />
-		이름 : <input type="text" name="name">
-		<br />
-		주소 : <input type="text" name="address"> <input type="submit" value="가입">
+		아이디 :
+		<input type="text" name="id">
+		<br /> 비밀번호 :
+		<input type="password" name="password">
+		<br /> 이름 :
+		<input type="text" name="name">
+		<br /> 주소 :
+		<input type="text" name="address">
+		<input type="submit" value="가입">
 	</form>
 </body>
 </html>

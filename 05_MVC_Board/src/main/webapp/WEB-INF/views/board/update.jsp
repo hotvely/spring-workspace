@@ -33,17 +33,22 @@ h1 {
 		<h1>게시글 수정</h1>
 		<form action="/board/update" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<label for="title">제목</label> <input type="text" name="title" id="title" class="form-control" value="${board.title }" />
+				<label for="title">제목</label>
+				<input type="text" name="title" id="title" class="form-control" value="${board.title }" />
 			</div>
 			<div class="form-group">
 				<label for="content">내용</label>
 				<textarea name="content" id="content" cols="30" rows="10" class="form-control" style="resize: none">${board.content }</textarea>
 			</div>
 			<div class="form-group">
-				<label for="uploadFile">Add File</label> <input class="form-control" type="file" id="uploadFile" name="uploadFile" accept="image/*" multiple />
+				<label for="uploadFile">Add File</label>
+				<input class="form-control" type="file" id="uploadFile" name="uploadFile" accept="image/*" multiple />
 			</div>
 			<div class="form-group">
-				<label for="writer">작성자</label> <input type="text" id="writer" name="writer" value="${board.writer}" class="form-control" readonly="readonly" /> <input type="hidden" name="no" value="${board.no}" /> <input type="hidden" name="url" value="${board.url}" />
+				<label for="writer">작성자</label>
+				<input type="text" id="writer" name="writer" value="${board.writer}" class="form-control" readonly="readonly" />
+				<input type="hidden" name="no" value="${board.no}" />
+				<input type="hidden" name="url" value="${board.url}" />
 			</div>
 			<div class="button">
 				<div class="update-delete-btn">

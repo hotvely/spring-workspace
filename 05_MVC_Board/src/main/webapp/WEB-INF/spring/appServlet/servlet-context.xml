@@ -9,7 +9,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/upload/**" location="/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -36,7 +36,6 @@
 	<beans:bean name="downloadView" class="com.kh.mvc.util.DownloadView">
 	</beans:bean>
 	<!-- BeanNameViewResolver를 0으로 설정 해 놔서, View page 의 이름을 찾을 때 까지 찾는다. 찾아서 있으면 결과 페이지로 연결하고, 찾았는데 없으면.InternalResourceViewResolver에서 찾음 -->
-
 
 
 

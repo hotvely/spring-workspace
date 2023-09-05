@@ -80,15 +80,17 @@ h1 {
 				<input type="hidden" name="no" value="${board.no}" />
 			</div>
 			<div class="button">
-				<div>${userInfo.id }</div>
-				<div>${ board.writer  }</div>
-				<sec:authentication property="principal" var="userInfo" />
-				<c:if test="${userInfo.id eq board.writer }">
-					<div class="update-delete-btn">
-						<a class="btn btn-outline-warning" href="/board/update?no=${board.no }">수정</a>
-						<a class="btn btn-outline-danger" href="/board/delete?no=${board.no }">삭제</a>
-					</div>
-				</c:if>
+				<!--  principle 계정 정보를 가지고 있음!
+			만약 로그인 된 정보가 없으면 anonymousUser(문자열)이 들어감..; -->
+				<sec:authorize access="hasRole('ROLE_MEMBER')"><!-- <-얘는 권한 관련 된 친구;  -->
+					<sec:authentication property="principal" var="userInfo" /> <!--  <- 얘는 인증 관련 친구!  -->
+					<c:if test="${userInfo.id eq board.writer }">
+						<div class="update-delete-btn">
+							<a class="btn btn-outline-warning" href="/board/update?no=${board.no }">수정</a>
+							<a class="btn btn-outline-danger" href="/board/delete?no=${board.no }">삭제</a>
+						</div>
+					</c:if>
+				</sec:authorize>
 				<div class="back-btn">
 					<a class="btn btn-outline-light" href="/board/list">뒤로</a>
 				</div>
@@ -98,6 +100,8 @@ h1 {
 	<script type="text/javascript">
       const overimg = document.querySelector(".overimg");
       const img = document.querySelector(".img");
+      if(img != null)
+   	 {
 
       img.addEventListener("mouseover", (event) => {
         console.log(event);
@@ -110,6 +114,7 @@ h1 {
         img.style.height = "15%";
         console.log("이미지 오버 !!");
       });
+      }
     </script>
 </body>
 </html>
