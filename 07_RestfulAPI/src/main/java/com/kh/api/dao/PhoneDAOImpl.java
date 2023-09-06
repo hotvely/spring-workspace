@@ -30,6 +30,13 @@ public class PhoneDAOImpl implements PhoneDAO
 	}
 
 	@Override
+	public int delete(String num)
+	{
+		// TODO Auto-generated method stub
+		return session.delete("phone.delete", num);
+	}
+
+	@Override
 	public Phone select(Phone phone)
 	{
 		// TODO Auto-generated method stub

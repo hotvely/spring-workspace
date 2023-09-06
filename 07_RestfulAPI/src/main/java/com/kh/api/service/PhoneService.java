@@ -12,6 +12,8 @@ public interface PhoneService
 
 	int delete(List<String> list);
 
+	int delete(String num);
+
 	int update(Phone phone);
 
 	Phone select(Phone phone);

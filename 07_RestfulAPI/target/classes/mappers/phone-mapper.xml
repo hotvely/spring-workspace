@@ -26,28 +26,36 @@
 	</insert>
 
 
-
-
-
 	<!-- dynamic query 이용해서 : selectOne (num에 따라서...) , selectAll 둘다 .... -->
 	<select id="select" resultMap="Phone">
+		SELECT * FROM PHONE
+		JOIN COMPANY ON PHONE.vcode = COMPANY.vcode
 		<choose>
-			<when test="num !=null">	
-				SELECT * FROM PHONE JOIN COMPANY ON PHONE.vcode = COMPANY.vcode WHERE num = #{num}
+			<when test="num!=null">
+				WHERE num = #{num}
 			</when>
-			<otherwise>
-				SELECT * FROM PHONE JOIN COMPANY ON PHONE.vcode = COMPANY.vcode
-			</otherwise>
 		</choose>
 	</select>
 
-	<delete id="delete"></delete>
 
-	<update id="update"></update>
+	<!-- delete list로 받을 때.. ; <delete id="delete"> DELETE FROM PHONE <where> <foreach collection="list" item="item" open="num=" close="" separator="or"> #{num} </foreach> </where> </delete> -->
+
+	<delete id="delete">
+		DELETE FROM PHONE
+		<where>
+			num=#{num}
+		</where>
+	</delete>
+	
+	
+	<update id="update" parameterType="Phone">
+		UPDATE PHONE SET model=#{model}, price=#{price} WHERE num=#{num}
+	</update>
 
 
 	<!-- dynamic query 사용 : id pw 둘다 입력했을 때랑, id만 입력했을때 ...... ? -->
-	<select id="selectUser">
-
+	<select id="selectUser" parameterType="userInfo" resultType="userInfo">
+		SELECT id, pw FROM userinfo WHERE id=#{id}
+		<if test="pw!=null">AND pw=#{pw}</if>
 	</select>
 </mapper>

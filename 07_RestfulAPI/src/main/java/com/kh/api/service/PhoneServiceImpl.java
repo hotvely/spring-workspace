@@ -26,7 +26,16 @@ public class PhoneServiceImpl implements PhoneService
 	public int delete(List<String> list)
 	{
 		// TODO Auto-generated method stub
+		
 		return dao.delete(list);
+	}
+	
+	@Override
+	public int delete(String num)
+	{
+		// TODO Auto-generated method stub
+		
+		return dao.delete(num);
 	}
 
 	@Override
